@@ -307,6 +307,7 @@ declare class Document extends Node {
     createElement(tagName: 'img'): HTMLImageElement;
     createElement(tagName: 'input'): HTMLInputElement;
     createElement(tagName: 'label'): HTMLLabelElement;
+    createElement(tagName: 'link'): HTMLLinkElement;
     createElement(tagName: 'media'): HTMLMediaElement;
     createElement(tagName: 'option'): HTMLOptionElement;
     createElement(tagName: 'p'): HTMLParagraphElement;
@@ -582,25 +583,26 @@ declare class Element extends Node {
     tagName: string;
 
     getAttribute(name?: string): string;
-    getAttributeNS(namespaceURI: string, localName: string): string;
     getAttributeNode(name: string): Attr;
     getAttributeNodeNS(namespaceURI: string, localName: string): Attr;
+    getAttributeNS(namespaceURI: string, localName: string): string;
     getBoundingClientRect(): ClientRect;
     getElementsByClassName(names: string): HTMLCollection;
     getElementsByTagName(name: string): HTMLCollection;
     getElementsByTagNameNS(namespaceURI: string, localName: string): NodeList<HTMLElement>;
     hasAttribute(name: string): boolean;
     hasAttributeNS(namespaceURI: string, localName: string): boolean;
-    insertAdjacentHTML(position: string, text: string): void;
     insertAdjacentElement?: (position: ('beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'), node: Node) => void;
+    insertAdjacentHTML(position: string, text: string): void;
+    matches(selector: string): bool;
     removeAttribute(name?: string): void;
-    removeAttributeNS(namespaceURI: string, localName: string): void;
     removeAttributeNode(oldAttr: Attr): Attr;
+    removeAttributeNS(namespaceURI: string, localName: string): void;
     scrollIntoView(arg?: (boolean | { behavior?: ('auto' | 'instant' | 'smooth'), block?: ('start' | 'end') })): void;
     setAttribute(name?: string, value?: string): void;
-    setAttributeNS(namespaceURI: string, qualifiedName: string, value: string): void;
     setAttributeNode(newAttr: Attr): Attr;
     setAttributeNodeNS(newAttr: Attr): Attr;
+    setAttributeNS(namespaceURI: string, qualifiedName: string, value: string): void;
 
     // from ParentNode interface
     childElementCount: number;
@@ -1264,6 +1266,16 @@ declare class HTMLLabelElement extends HTMLElement {
     form: HTMLFormElement | null;
     htmlFor: string;
     control: HTMLElement | null;
+}
+
+declare class HTMLLinkElement extends HTMLElement {
+    crossOrigin: ?('anonymous' | 'use-credentials');
+    href: string;
+    hreflang: string;
+    media: string;
+    rel: string;
+    sizes: DOMTokenList;
+    type: string;
 }
 
 declare class HTMLScriptElement extends HTMLElement {
